@@ -1,4 +1,4 @@
-# 🔐 Forensic File Encryption Tool (Batch Mode)
+# 🔐 Multi-File Encryption Tool (Batch Mode)
 
 This is an advanced desktop application developed in Python for encrypting and decrypting files using a robust, custom stream cipher. It is designed for batch processing, security, and data integrity verification.
 
