@@ -13,6 +13,27 @@ This project demonstrates strong application development and cryptographic best 
 * **Secure Key Derivation:** Employs **BLAKE2b** and **Salting** (using the `secrets` module) to securely derive a unique cipher key for every file, even if the password is the same.
 * **Batch Processing:** Supports selecting and processing multiple files in a single operation.
 
+## 🔐 How the Encryption Works
+
+```
+Password Input
+     │
+     ▼
+SHA-256 Key Derivation     ← Derives a 256-bit key from your password
+     │
+     ▼
+Blake2b Salted Keystream   ← Generates a secure, salted keystream
+     │
+     ▼
+Chunk-based XOR Engine     ← Processes file in 8KB blocks
+(8KB blocks)                  → Constant memory footprint regardless of file size
+     │
+     ▼
+Encrypted Output File
+```
+
+**No file size limit** — a 10GB file uses the same ~8KB of RAM as a 1KB file during encryption.
+
 ## 🛠️ Technologies Used
 
 | Category | Technology | Purpose |
@@ -62,3 +83,8 @@ After decryption, the application provides a detailed report:
 ## 💡 Why This Project is Essential
 
 This project demonstrates an understanding of **file-level security**. A computer login password only protects the device, but your files can be compromised if the storage is accessed directly or transferred to another device. This tool protects the data itself, ensuring **confidentiality** (only the key works) and **integrity** (the file is confirmed to be unaltered).
+
+## ⚠️ Security Notice
+
+This tool is built for learning and demonstration purposes. The XOR-based encryption with Blake2b keystream provides reasonable security for personal files but is **not recommended for protecting highly sensitive data** in production environments. For critical security needs, use established standards like AES-256-GCM.
+
